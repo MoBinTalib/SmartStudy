@@ -1,126 +1,130 @@
 # SmartStudy — AI Study Assistant
-# سمارت ستدي — مساعد الدراسة بالذكاء الاصطناعي
-
-## Project Overview | نظرة عامة على المشروع
-
-SmartStudy is an AI-powered study assistant that transforms raw study materials into interactive learning content.  
-The application uses the Llama 3 model running locally through Ollama to generate:
-
-- Study summaries
-- Key concepts tables
-- Interactive quizzes
-
-The goal of the project is to help students study more efficiently using Large Language Models (LLMs).
-
-سمارت ستدي هو مساعد دراسة يعمل بالذكاء الاصطناعي يقوم بتحويل المحتوى الدراسي الخام إلى مواد تعليمية تفاعلية.  
-يستخدم التطبيق نموذج Llama 3 الذي يعمل محليًا عبر Ollama لإنشاء:
-
-- ملخصات دراسية
-- جداول للمفاهيم الأساسية
-- اختبارات تفاعلية
-
-هدف المشروع هو مساعدة الطلاب على الدراسة بشكل أكثر فعالية باستخدام النماذج اللغوية الكبيرة (LLMs).
 
 ---
 
-# Problem Statement | مشكلة المشروع
+## Project Overview
 
-Students often spend a large amount of time organizing notes, extracting important concepts, and creating self-assessment quizzes.
+SmartStudy is an AI-powered study assistant that transforms raw study materials into structured learning content using a local Large Language Model (LLM) via Ollama.
 
-SmartStudy automates these tasks using AI to improve the learning experience and save time.
-
-يقضي الطلاب وقتًا طويلًا في تنظيم الملاحظات الدراسية واستخراج المفاهيم المهمة وإنشاء اختبارات للمراجعة.
-
-يقوم SmartStudy بأتمتة هذه المهام باستخدام الذكاء الاصطناعي لتحسين تجربة التعلم وتوفير الوقت.
+سمارت ستدي هو مساعد دراسة يعتمد على الذكاء الاصطناعي يقوم بتحويل المحتوى الدراسي الخام إلى محتوى تعليمي منظم باستخدام نموذج لغوي يعمل محليًا عبر Ollama.
 
 ---
 
-# Features | المميزات
+## Problem Statement
 
-## English
+Students spend a lot of time organizing notes and creating revision materials. SmartStudy automates this process using AI to improve learning efficiency.
 
-- AI-generated study summaries
-- Key concepts extraction
-- Interactive multiple-choice quizzes
-- Modern responsive UI
-- Local AI execution using Ollama
-- No cloud API required
-- Error handling and validation
-- Structured JSON-based AI responses
-
-## العربية
-
-- إنشاء ملخصات دراسية بالذكاء الاصطناعي
-- استخراج المفاهيم الأساسية
-- اختبارات تفاعلية متعددة الخيارات
-- واجهة حديثة ومتجاوبة
-- تشغيل النموذج محليًا عبر Ollama
-- لا يحتاج إلى API مدفوع
-- معالجة الأخطاء والتحقق من البيانات
-- استخدام JSON لتنظيم النتائج
+يقضي الطلاب وقتًا طويلًا في تنظيم الملاحظات وإنشاء مواد المراجعة. يقوم SmartStudy بأتمتة هذه العملية باستخدام الذكاء الاصطناعي لتحسين كفاءة التعلم.
 
 ---
 
-# Technologies Used | التقنيات المستخدمة
+## Features
 
-| Technology | Purpose |
-|------------|----------|
-| HTML5 | Structure |
-| CSS3 | Styling & Responsive Design |
-| JavaScript (Vanilla JS) | Application Logic |
-| Ollama | Local LLM Runtime |
-| Llama 3.2 | Large Language Model |
-| Fetch API | API Communication |
-| JSON | Structured Output |
+- AI-generated summaries  
+- Key concept extraction  
+- Interactive quizzes  
+- Modern responsive UI  
+- Local AI (Ollama + Llama 3)  
+- JSON structured output  
+- Error handling and validation  
 
-| التقنية | الاستخدام |
-|----------|------------|
-| HTML5 | بناء الواجهة |
-| CSS3 | التصميم والاستجابة |
-| JavaScript | منطق التطبيق |
-| Ollama | تشغيل النموذج محليًا |
-| Llama 3.2 | النموذج اللغوي |
-| Fetch API | التواصل مع النموذج |
-| JSON | تنظيم البيانات |
+- إنشاء ملخصات بالذكاء الاصطناعي  
+- استخراج المفاهيم الأساسية  
+- اختبارات تفاعلية  
+- واجهة حديثة ومتجاوبة  
+- يعمل محليًا باستخدام Ollama  
+- مخرجات بصيغة JSON  
+- معالجة الأخطاء والتحقق  
 
 ---
 
-# System Architecture | هيكل النظام
+## Technologies Used
 
-The project is divided into two main parts:
+- HTML5  
+- CSS3  
+- JavaScript  
+- Ollama  
+- Llama 3.2  
+- Fetch API  
+- JSON  
 
-## Frontend
-Handles:
-- User interface
-- User interactions
-- Rendering AI-generated results
-- Quiz system
-
-Files:
-- `index.html`
-- `style.css`
-- `app.js`
-
-## AI Integration Layer
-Handles:
-- Prompt engineering
-- Communication with Ollama
-- JSON parsing
-- Response validation
-
-Files:
-- `api.js`
+- HTML5  
+- CSS3  
+- JavaScript  
+- Ollama  
+- Llama 3.2  
+- Fetch API  
+- JSON  
 
 ---
 
-# LLM Integration | ربط النموذج اللغوي
+## LLM Integration
 
-SmartStudy uses:
+SmartStudy uses Llama 3 running locally via Ollama:
 
-- **Llama 3.2**
-- Running locally using **Ollama**
-
-The application sends prompts to the local Ollama server:
-
-```bash
 http://localhost:11434
+
+سمارت ستدي يستخدم نموذج Llama 3 يعمل محليًا عبر Ollama:
+
+http://localhost:11434
+
+
+---
+
+## System Architecture
+
+### Frontend
+
+- UI rendering  
+- User input handling  
+- Quiz system  
+
+- عرض الواجهة  
+- التعامل مع إدخال المستخدم  
+- نظام الاختبارات  
+
+### AI Layer
+
+- Prompt engineering  
+- API communication  
+- JSON parsing  
+
+- تصميم الـ Prompt  
+- الاتصال بالنموذج  
+- تحليل JSON  
+
+---
+
+## Installation
+
+Install Ollama:  
+https://ollama.com
+
+تثبيت Ollama:  
+https://ollama.com
+
+---
+
+Pull model:
+ollama pull llama3.2
+
+تحميل النموذج:
+ollama pull llama3.2
+
+---
+
+Run server:
+ollama serve
+
+تشغيل السيرفر:
+ollama serve
+
+---
+
+Open `index.html` in browser.
+
+افتح ملف `index.html` في المتصفح.
+
+---
+
+
