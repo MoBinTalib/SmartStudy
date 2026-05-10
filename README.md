@@ -126,4 +126,14 @@ Open `index.html` in browser.
 
 ---
 
+## Team
 
+- Developed by: **Mohammed Saleh**
+
+---
+
+## Credits
+
+This project was fully designed, developed, and tested by a single student as part of the course requirements.
+
+تم تطوير هذا المشروع بالكامل بواسطة الطالب محمد صالح كجزء من متطلبات المقرر الدراسي.
