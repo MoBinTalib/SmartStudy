@@ -1,5 +1,4 @@
-# SmartStudy — AI Study Assistant
-
+<h1 align="center">SmartStudy — AI Study Assistant</h1>
 ---
 
 ## Project Overview
