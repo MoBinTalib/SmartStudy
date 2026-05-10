@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartStudy — AI Study Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">S</div>
+  <div class="logo-text">Smart<span>Study</span></div>
+  <div class="header-badge">🦙 Llama 3 (Local AI)</div>
+</header>
+
+<main>
+
+  <div class="hero">
+    <h1>Turn your notes into<br><em>active learning</em></h1>
+    <p>Paste any text — lecture notes, a chapter, a topic — and instantly get a summary, key concepts table, and an interactive quiz. Powered by Llama 3 running locally on your machine.</p>
+  </div>
+
+  <!-- MODEL STATUS -->
+  <div class="model-card">
+    <div class="model-card-title">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Ollama Server — Local Llama 3
+    </div>
+    <div class="model-row">
+      <input type="text" class="model-url-input" id="ollamaUrl" value="http://localhost:11434" placeholder="http://localhost:11434"/>
+      <button class="check-btn" onclick="checkStatus()">Check Status</button>
+      <span class="status-pill unknown" id="statusPill">⚪ Not checked</span>
+    </div>
+    <p class="model-notice">
+      Make sure <strong>Ollama</strong> is installed and running.<br/>
+      Install from <a href="https://ollama.com" target="_blank">ollama.com</a> &nbsp;→&nbsp;
+      Then run in terminal: <code>ollama pull llama3.2</code> &nbsp;then&nbsp; <code>ollama serve</code>
+    </p>
+  </div>
+
+  <!-- INPUT -->
+  <div class="input-card">
+    <div class="input-label"><span class="dot"></span>Paste your study material</div>
+    <textarea id="studyText" placeholder="Example: Photosynthesis is the process by which green plants convert sunlight into glucose using chlorophyll inside chloroplasts. The process has two main stages: the light-dependent reactions and the Calvin cycle..."></textarea>
+    <div class="options-row">
+      <label class="option-chip active" id="chip-summary">
+        <input type="checkbox" checked onchange="toggleChip(this,'chip-summary')"/> 📋 Summary
+      </label>
+      <label class="option-chip active" id="chip-concepts">
+        <input type="checkbox" checked onchange="toggleChip(this,'chip-concepts')"/> 🔑 Key Concepts
+      </label>
+      <label class="option-chip active" id="chip-quiz">
+        <input type="checkbox" checked onchange="toggleChip(this,'chip-quiz')"/> ✏️ Quiz (5 Q's)
+      </label>
+    </div>
+    <button class="generate-btn" id="genBtn" onclick="generate()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Generate Study Materials
+    </button>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-box" id="errorBox">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span id="errorMsg"></span>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-state" id="loadingState">
+    <div class="spinner-ring"></div>
+    <strong id="loadingMsg">Reading your notes…</strong>
+    <p>Llama 3 is analyzing your content locally on your machine.</p>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="result-tabs">
+      <button class="tab-btn active" onclick="switchTab('summary',this)">📋 Summary</button>
+      <button class="tab-btn"        onclick="switchTab('concepts',this)">🔑 Key Concepts</button>
+      <button class="tab-btn"        onclick="switchTab('quiz',this)">✏️ Quiz</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-summary">
+      <div class="result-card">
+        <div class="panel-title">Summary <span class="badge badge-purple">AI Generated</span></div>
+        <div id="summary-text"></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-concepts">
+      <div class="result-card">
+        <div class="panel-title">Key Concepts <span class="badge badge-teal">Quick Reference</span></div>
+        <table>
+          <thead><tr><th>Concept</th><th>Definition / Explanation</th><th>Why It Matters</th></tr></thead>
+          <tbody id="concepts-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-quiz">
+      <div class="quiz-header">
+        <div class="panel-title" style="margin-bottom:0">Quiz <span class="badge badge-amber">Test Yourself</span></div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="quiz-score">Score: <strong id="scoreDisplay">0</strong> / <span id="totalDisplay">0</span></div>
+          <button class="reset-btn" onclick="resetQuiz()">↺ Reset</button>
+        </div>
+      </div>
+      <div id="questions-container"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div><strong style="color:var(--text)">SmartStudy</strong> — Selected Topics Project · ALMAAREFA University, Dept. of CS &amp; IS</div>
+  <div class="footer-credits">
+    <span>👤 <strong style="color:var(--text)">[Mohammed Saleh]</strong></span>
+    <span>👤 <strong style="color:var(--text)">[Member 2 Name]</strong></span>
+    <span>Model: <a href="https://ollama.com" target="_blank">Llama 3 via Ollama</a></span>
+  </div>
+</footer>
+
+<!-- api.js loads first — contains all AI/model logic -->
+<script src="api.js"></script>
+<!-- app.js loads second — contains all UI/interaction logic -->
+<script src="app.js"></script>
+
+</body>
+</html>
